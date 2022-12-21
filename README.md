@@ -1,0 +1,29 @@
+# Fail2Ban configuration file
+#
+# Source: http://www.the-art-of-web.com/system/fail2ban-sendmail/
+# Contibutors: Gutza, the SASL regex
+#
+# $Revision: 0 $
+#
+
+[Definition]
+
+# Option:  failregex
+# Notes.:  regex to match the password failures messages in the logfile. The
+#          host must be matched by a group named "host". The tag "<HOST>" can
+#          be used for standard IP/hostname matching and is only an alias for
+#          (?:::f{4,6}:)?(?P<host>\S+)
+# Values:  TEXT
+#
+
+failregex = \[<HOST>\] .*to MTA
+#            \[<HOST>\] \(may be forged\)
+            \[<HOST>\], reject.*\.\.\. Relaying denied
+            (User unknown)\n* \[<HOST>\]
+            badlogin: .* \[<HOST>\] plaintext .* SASL
+
+# Option:  ignoreregex
+# Notes.:  regex to ignore. If this regex matches, the line is ignored.
+# Values:  TEXT
+#
+ignoreregex =
